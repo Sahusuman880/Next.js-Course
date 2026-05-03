@@ -21,6 +21,8 @@ export default function RootLayout({
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/dashboard">Dashboard</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/products">Products</Link>
           </nav>
         </section>
         {children}
