@@ -1,5 +1,11 @@
 import Link from "next/link";
 import './globals.css';
+import {Inter} from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'],
+  weight:['400','700'],
+  display:'swap'
+})
 
 export default function RootLayout({
   children,
@@ -14,7 +20,7 @@ export default function RootLayout({
       <head>
         <title>Next.js Course</title>
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className={`min-h-full flex flex-col ${inter.className}`}>
         <section>
           <nav style={{display:'flex',gap:12}}>
             <Link href="/">Home</Link>
