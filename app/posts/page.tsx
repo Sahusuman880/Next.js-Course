@@ -8,6 +8,7 @@ export default async function Posts() {
         // cache: 'no-store'  
     });
     const data: Post[] = await response.json();
+    throw new Error("failed to fetch")
     return(
         <div style={{padding:20}}>
             <h1>Posts Page</h1>
