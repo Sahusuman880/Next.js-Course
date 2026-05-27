@@ -1,11 +1,36 @@
 import Link from "next/link";
 import './globals.css';
 import {Inter} from 'next/font/google';
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ['latin'],
   weight:['400','700'],
   display:'swap'
 })
+
+export const metadata: Metadata = {
+  title: {
+    default: "Next.js Course",
+    template:'%s | Sumangit'
+  },
+  description: "Learn Next.js with us",
+  keywords: ["Next.js", "React", "JavaScript", "Web Development"],
+  openGraph: {
+    title: "Next.js Course",
+    description: "Learn Next.js with us",
+    type: "website",
+    locale: "en_US",
+    siteName: "Next.js Course",
+    images: [
+      {
+        url: "https://example.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Next.js Course",
+      },
+    ],
+  },
+}
 
 export default function RootLayout({
   children,
