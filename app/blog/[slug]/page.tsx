@@ -1,35 +1,41 @@
-interface BlogPageProps {
-  params: {
-    slug: string;
+import { getPost, getStaticPosts } from "@/lib/posts";
+import type { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+  if(!post) {
+    return {
+      title: "Post not found",
+      description: "Post not found",
+    };
+  }
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      images:['/images/posts.jpg']
+    }
   };
 }
 
-const blogData: Record<string, { title: string; content: string }> = {
-  "nextjs": {
-    title: "Next.js Learning",
-    content: "Next.js is a React Framework",
-  },
-  "reactjs": {
-    title: "React.js Learning",
-    content: "react.js is a React Framework",
-  },
-  "nodejs": {
-    title: "Node.js Learning",
-    content: "Node.js is a React Framework",
-  },
-};
 
-export default async function BlogDetailsPage({ params }: BlogPageProps) {
+
+export default async function PostPage({ params }:Props) {
   const { slug } = await params;
-  const blog = blogData[slug];
-  if (!blog) {
-    return <h1>blog not found</h1>;
-  }
+  const post = getPost(slug);
+
   return (
-    <div>
-      <h1>{blog.title}</h1>
-      <p>{blog.content}</p>
-      <p>slug url:{slug}</p>
-    </div>
-  )
-}
+    <>
+      <h1>{post?.title}</h1>
+      <p>{post?.description}</p>
+      <p>{post?.content}</p>
+    </>
+  );
+} 
