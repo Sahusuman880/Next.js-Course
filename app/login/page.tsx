@@ -19,6 +19,8 @@ export default function LoginPage() {
       body: JSON.stringify({ email, password }),
     });
     if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem("auth_token", data.token);
       router.push("/dashboard");
       router.refresh();
     } else {

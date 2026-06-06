@@ -1,3 +1,4 @@
+import { generateToken } from "@/lib/jwt";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -6,13 +7,11 @@ export async function POST(request: Request) {
 
   //Demo Credential
   if (email === "admin@gmail.com" && password === "admin") {
+    const token = generateToken({ email });
     const response = NextResponse.json({
       message: "Login Successful",
+      token,
     });
-
-    //set cokkies
-    response.cookies.set("auth_token", "token");
-
     return response;
   }
 
